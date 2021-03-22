@@ -1,19 +1,26 @@
-// do not make changes to this file
-const sharedConfig = {
-  client: 'sqlite3',
-  useNullAsDefault: true,
-  migrations: { directory: './data/migrations' },
-  pool: { afterCreate: (conn, done) => conn.run('PRAGMA foreign_keys = ON', done) },
-}
-
 module.exports = {
   development: {
-    ...sharedConfig,
-    connection: { filename: './data/auth.db3' },
-    seeds: { directory: './data/seeds' },
+    client: 'sqlite3',
+    connection: { filename: './database/auth.db3' },
+    useNullAsDefault: true,
+    migrations: {
+      directory: './database/migrations',
+      tableName: 'dbmigrations',
+    },
+    seeds: { directory: './database/seeds' },
   },
   testing: {
-    ...sharedConfig,
-    connection: { filename: './data/test.db3' },
-  },
+    client: "sqlite3",
+    connection: {
+      filename: "./database/test.db3"
+    },
+    useNullAsDefault: true,
+    migrations: {
+      directory: "./database/migrations"
+    },
+    seeds: {
+      directory: "./database/seeds"
+    }
+  }
 };
+
